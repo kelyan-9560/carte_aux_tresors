@@ -3,12 +3,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AdventurerTest {
 
-    GameMap gameMap = new GameMap(new MapSize(3, 4));
+    GameMap gameMap = new GameMap(new MapSize(3, 4), List.of(new Treasure(new Coordinate(1, 4))));
 
     Adventurer adventurer;
 
@@ -18,9 +19,9 @@ class AdventurerTest {
         var orientation = new Orientation("N");
 
         adventurer = new Adventurer("Lara", new Coordinate(1, 1),
-                                            orientation, new ArrayList<>());
+                                            orientation, new ArrayList<>(), new ArrayList<>());
 
-        var adventurerWithNewCoordinate = adventurer.move("A", gameMap);
+        var adventurerWithNewCoordinate = adventurer.move(new Instruction("A"), gameMap);
 
         assertEquals(adventurerWithNewCoordinate.getCoordinate(), new Coordinate(1, 0));
     }
@@ -31,9 +32,9 @@ class AdventurerTest {
         var orientation = new Orientation("S");
 
         adventurer = new Adventurer("Lara", new Coordinate(1, 1),
-                orientation, new ArrayList<>());
+                orientation, new ArrayList<>(), new ArrayList<>());
 
-        var adventurerWithNewCoordinate = adventurer.move("A", gameMap);
+        var adventurerWithNewCoordinate = adventurer.move(new Instruction("A"), gameMap);
 
         assertEquals(adventurerWithNewCoordinate.getCoordinate(), new Coordinate(1, 2));
     }
@@ -44,9 +45,9 @@ class AdventurerTest {
         var orientation = new Orientation("E");
 
         adventurer = new Adventurer("Lara", new Coordinate(1, 1),
-                orientation, new ArrayList<>());
+                orientation, new ArrayList<>(), new ArrayList<>());
 
-        var adventurerWithNewCoordinate = adventurer.move("A", gameMap);
+        var adventurerWithNewCoordinate = adventurer.move(new Instruction("A"), gameMap);
 
         assertEquals(adventurerWithNewCoordinate.getCoordinate(), new Coordinate(2, 1));
     }
@@ -57,9 +58,9 @@ class AdventurerTest {
         var orientation = new Orientation("W");
 
         adventurer = new Adventurer("Lara", new Coordinate(1, 1),
-                orientation, new ArrayList<>());
+                orientation, new ArrayList<>(), new ArrayList<>());
 
-        var adventurerWithNewCoordinate = adventurer.move("A", gameMap);
+        var adventurerWithNewCoordinate = adventurer.move(new Instruction("A"), gameMap);
 
         assertEquals(adventurerWithNewCoordinate.getCoordinate(), new Coordinate(0, 1));
     }

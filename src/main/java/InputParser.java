@@ -1,7 +1,4 @@
-import models.Adventurer;
-import models.Coordinate;
-import models.MapSize;
-import models.Orientation;
+import models.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +14,8 @@ public class InputParser {
                 lineSplit.get(1),
                 new Coordinate(Integer.parseInt(lineSplit.get(2)), Integer.parseInt(lineSplit.get(3))),
                 new Orientation(lineSplit.get(4)),
-                new ArrayList<>()
-        );
+                new ArrayList<>(),
+                parseInstructions(lineSplit));
     }
 
     public static Coordinate parseCoordinate(List<String> lineSplit) {
@@ -28,8 +25,12 @@ public class InputParser {
         );
     }
 
-    public static List<String> parseInstructions(List<String> lineSplit) {
-        return List.of(lineSplit.get(5).split(""));
+    public static List<Instruction> parseInstructions(List<String> lineSplit) {
+        List<Instruction> instructions = new ArrayList<>();
+        for (char instruction : lineSplit.get(5).toCharArray()) {
+            instructions.add(new Instruction(String.valueOf(instruction)));
+        }
+        return instructions;
     }
 
 }

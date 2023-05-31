@@ -1,13 +1,16 @@
 package models;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class GameMap {
     private final MapSize mapSize;
     private String[][] map;
+    private final List<Treasure> treasures;
 
-    public GameMap(MapSize mapSize) {
+    public GameMap(MapSize mapSize, List<Treasure> treasures) {
         this.mapSize = mapSize;
+        this.treasures = treasures;
         initMap();
     }
 
@@ -32,6 +35,22 @@ public class GameMap {
 
     public void addTreasure(Coordinate coordinate) {
         map[coordinate.getX()][coordinate.getY()] = "T";
+        treasures.add(new Treasure(coordinate));
+    }
+
+    public void removeTreasure(Coordinate coordinate) {
+        treasures.stream()
+                .filter(treasure -> treasure.getCoordinate().equals(coordinate))
+                .findFirst()
+                .map(treasures::remove);
+
+        var treasureAlreadyHere = treasures.stream()
+                .filter(treasure -> treasure.getCoordinate().equals(coordinate))
+                .findFirst();
+
+        if(treasureAlreadyHere.isEmpty()){
+            map[coordinate.getX()][coordinate.getY()] = "O";
+        }
     }
     public void addAdventurer(Adventurer adventurer) {
         map[adventurer.getCoordinate().getX()][adventurer.getCoordinate().getY()] = "A";

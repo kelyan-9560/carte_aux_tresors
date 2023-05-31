@@ -15,41 +15,52 @@ public class Adventurer {
     private final Orientation orientation;
     private final List<Treasure> treasures;
 
-    public Adventurer(String name, Coordinate coordinate, Orientation orientation, List<Treasure> treasures) {
+    private final List<Instruction> instructions;
+
+    public Adventurer(String name, Coordinate coordinate, Orientation orientation, List<Treasure> treasures, List<Instruction> instructions) {
         this.name = name;
         this.coordinate = coordinate;
         this.orientation = orientation;
         this.treasures = treasures;
+        this.instructions = instructions;
     }
 
 
     //TODO : maybe create a new class for this
-    public Adventurer move(String instruction, GameMap gameMap){
-        switch (instruction) {
+    public Adventurer move(Instruction instruction, GameMap gameMap){
+        switch (instruction.getValue()) {
             case "A":
                 var newCoordinate = goTo();
 
                 var moveValidator = new MoveValidator(gameMap, newCoordinate);
-                if (moveValidator.isPossible()) {
-                    return new Adventurer(name, newCoordinate, orientation, treasures);
+                if (!moveValidator.isPossible()) return this;
+
+                //TODO : check if there is a treasure
+                if(gameMap.getMap()[newCoordinate.getX()][newCoordinate.getY()].equals("T")){
+                    //TODO : remove the treasure from the map
+                    //TODO : add the treasure to the adventurer
+                    gameMap.removeTreasure(newCoordinate);
+                    treasures.add(new Treasure(newCoordinate));
                 }
-                return this;
+
+
+                return new Adventurer(name, newCoordinate, orientation, treasures, instructions);
 
             case "G":
                 return new Adventurer(
                         name,
                         coordinate,
                         orientation.turnLeft(),
-                        treasures
-                );
+                        treasures,
+                        instructions);
 
             case "D":
                 return new Adventurer(
                         name,
                         coordinate,
                         orientation.turnRight(),
-                        treasures
-                );
+                        treasures,
+                        instructions);
             default:
                 throw new InstructionsException("Instruction not recognized");
         }
@@ -89,6 +100,12 @@ public class Adventurer {
     public List<Treasure> getTreasures() {
         return treasures;
     }
+
+    public List<Instruction> getInstructions() {
+        return instructions;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {

@@ -7,15 +7,13 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameMapTest {
-
-    GameMap gameMap = new GameMap(new MapSize(3, 4));
+    GameMap gameMap = new GameMap(new MapSize(3, 4), new ArrayList<>());
 
     Adventurer adventurer = new Adventurer(
             "Lara",
             new Coordinate(1, 1),
             new Orientation("N"),
-            new ArrayList<>()
-    );
+            new ArrayList<>(), new ArrayList<>());
 
     @Test
     @DisplayName("isInsideTheMap : should return false when 'x' coordinate is negative")
