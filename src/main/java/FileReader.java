@@ -29,24 +29,16 @@ public class FileReader {
                 List<String> lineSplit = List.of(line.split("-"));
 
                 if (line.startsWith("C")) {
-                    System.out.println("-----------------------------------");
-                    System.out.println("Map : " + line);
-
                     MapSize mapSize = InputParser.parseMapSize(lineSplit);
                     gameMap.set(new GameMap(mapSize, new ArrayList<>()));
                 }
                 if (line.startsWith("M")) {
-                    System.out.println("-----------------------------------");
-                    System.out.println("Mountain : " + line);
 
                     var mountainCoordinate = InputParser.parseCoordinate(lineSplit.get(1), lineSplit.get(2));
                     gameMap.get().addMountain(mountainCoordinate);
 
                 }
                 if (line.startsWith("T")) {
-                    System.out.println("-----------------------------------");
-                    System.out.println("Treasure : " + line);
-
                     int nbTreasure = Integer.parseInt(lineSplit.get(3));
                     for (int i = 0; i < nbTreasure; i++) {
                         var treasureCoordinate = InputParser.parseCoordinate(lineSplit.get(1), lineSplit.get(2));
@@ -55,27 +47,10 @@ public class FileReader {
 
                 }
                 if (line.startsWith("A")) {
-                    System.out.println("-----------------------------------");
-                    System.out.println("Adventurer : " + line);
-
                     Adventurer adventurer = InputParser.parseAdventurer(lineSplit);
-
-
-
-                    //List<Instruction> instructions = InputParser.parseInstructions(lineSplit);
-
                     adventurers.add(adventurer);
-                    /*for (Instruction instruction : instructions) {
-                        adventurer = adventurer.move(instruction, gameMap.get());
-
-                        System.out.println(adventurer.toFile());
-                    }
-
-                     */
                 }
             });
-            //System.out.println("Map : " + gameMap.get().toString());
-
         } catch (IOException e) {
             e.printStackTrace();
         }

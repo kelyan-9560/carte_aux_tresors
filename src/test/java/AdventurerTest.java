@@ -1,3 +1,4 @@
+import exceptions.InstructionsException;
 import models.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -99,7 +100,7 @@ class AdventurerTest {
 
     @Test
     @DisplayName("Adventurer should get a treasure")
-    void the_adventurer_should_get_a_treasure() {
+    void adventurer_should_get_a_treasure() {
         var orientation = new Orientation("N");
 
         adventurer = new Adventurer("Lara", new Coordinate(1, 3),

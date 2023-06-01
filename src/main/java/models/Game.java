@@ -22,7 +22,6 @@ public class Game {
                 }
             }
         }
-        adventurers.forEach(adventurer -> System.out.println(adventurer.toFile()));
     }
 
     private void updateAdventurer(Adventurer adventurerToReplace, Adventurer replacementAdventurer){

@@ -8,13 +8,7 @@ public class Main {
         Game game = fileReader.readFile();
         game.play();
 
-
         FileWriter fileWriter = new FileWriter("src/main/java/files/output.txt");
-
-
-
-
         fileWriter.write(game.toFile());
-
     }
 }

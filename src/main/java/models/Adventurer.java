@@ -35,14 +35,10 @@ public class Adventurer {
                 var moveValidator = new MoveValidator(gameMap, newCoordinate);
                 if (!moveValidator.isPossible()) return this;
 
-                //TODO : check if there is a treasure
                 if(gameMap.getMap()[newCoordinate.getX()][newCoordinate.getY()].equals("T")){
-                    //TODO : remove the treasure from the map
-                    //TODO : add the treasure to the adventurer
                     gameMap.removeTreasure(newCoordinate);
                     treasures.add(new Treasure(newCoordinate));
                 }
-
 
                 return new Adventurer(name, newCoordinate, orientation, treasures, instructions);
 
@@ -67,7 +63,6 @@ public class Adventurer {
     }
 
 
-    //TODO : return a new Adventurer with the new coordinate
     private Coordinate goTo() {
         switch (orientation.getValue()) {
             case "N":
