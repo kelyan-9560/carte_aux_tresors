@@ -34,17 +34,17 @@ public class InputParser {
                 parseInstructions(lineSplit));
     }
 
-    public static Coordinate parseCoordinate(List<String> lineSplit) {
+    public static Coordinate parseCoordinate(String inputX, String inputY) {
         int x;
         try {
-            x = Integer.parseInt(lineSplit.get(1));
+            x = Integer.parseInt(inputX);
         } catch (Exception e) {
             throw new CoordinateException("Map size X must be a number");
         }
 
         int y;
         try {
-            y = Integer.parseInt(lineSplit.get(2));
+            y = Integer.parseInt(inputY);
         } catch (Exception e) {
             throw new CoordinateException("Map size Y must be a number");
         }

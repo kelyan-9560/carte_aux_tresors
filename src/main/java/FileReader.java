@@ -39,7 +39,7 @@ public class FileReader {
                     System.out.println("-----------------------------------");
                     System.out.println("Mountain : " + line);
 
-                    var mountainCoordinate = InputParser.parseCoordinate(lineSplit);
+                    var mountainCoordinate = InputParser.parseCoordinate(lineSplit.get(1), lineSplit.get(2));
                     gameMap.get().addMountain(mountainCoordinate);
 
                 }
@@ -49,7 +49,7 @@ public class FileReader {
 
                     int nbTreasure = Integer.parseInt(lineSplit.get(3));
                     for (int i = 0; i < nbTreasure; i++) {
-                        var treasureCoordinate = InputParser.parseCoordinate(lineSplit);
+                        var treasureCoordinate = InputParser.parseCoordinate(lineSplit.get(1), lineSplit.get(2));
                         gameMap.get().addTreasure(treasureCoordinate);
                     }
 

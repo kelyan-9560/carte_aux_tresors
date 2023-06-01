@@ -1,3 +1,4 @@
+import exceptions.CoordinateException;
 import exceptions.MapSizeExceptions;
 import models.*;
 import org.junit.jupiter.api.DisplayName;
@@ -20,8 +21,7 @@ class InputParserTest {
     @Test
     @DisplayName("Should return an Coordinate() from a list of string")
     void should_return_an_coordinate() {
-        var input = List.of("M", "1", "4");
-        var coordinateParsed = InputParser.parseCoordinate(input);
+        var coordinateParsed = InputParser.parseCoordinate("1", "4");
         assertEquals(coordinateParsed, new Coordinate(1, 4));
     }
 
@@ -55,14 +55,12 @@ class InputParserTest {
     @Test
     @DisplayName("Should throw an exception when x of the coordinate is not a number")
     void should_throw_an_exception_when_x_of_the_coordinate_is_not_a_number() {
-        var input = List.of("M", "A", "4");
-        assertThrows(MapSizeExceptions.class, () -> InputParser.parseMapSize(input));
+        assertThrows(CoordinateException.class, () -> InputParser.parseCoordinate("A", "4"));
     }
 
     @Test
     @DisplayName("Should throw an exception when y of the coordinate is not a number")
     void should_throw_an_exception_when_y_of_the_coordinate_is_not_a_number() {
-        var input = List.of("M", "3", "Z");
-        assertThrows(MapSizeExceptions.class, () -> InputParser.parseMapSize(input));
+        assertThrows(CoordinateException.class, () -> InputParser.parseCoordinate("1", "Y"));
     }
 }
