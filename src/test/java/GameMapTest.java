@@ -61,6 +61,14 @@ class GameMapTest {
     }
 
     @Test
+    @DisplayName("removeTreasure : should remove a treasure on the map")
+    void removeTreasure() {
+        gameMap.addTreasure(new Coordinate(1, 1));
+        gameMap.removeTreasure(new Coordinate(1, 1));
+        assertEquals(gameMap.getTreasures().size(), 0);
+    }
+
+    @Test
     @DisplayName("addAdventurer : should add an adventurer on the map")
     void addAdventurer() {
         gameMap.addAdventurer(adventurer);

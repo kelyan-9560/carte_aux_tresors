@@ -64,6 +64,10 @@ public class GameMap {
         return map;
     }
 
+    public List<Treasure> getTreasures() {
+        return treasures;
+    }
+
     @Override
     public String toString() {
         return "models.Map{" +
