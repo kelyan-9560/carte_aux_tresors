@@ -106,16 +106,12 @@ public class Adventurer {
     }
 
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Adventurer that = (Adventurer) o;
-        return Objects.equals(name, that.name) &&
-                Objects.equals(coordinate, that.coordinate) &&
-                Objects.equals(orientation, that.orientation) &&
-                Objects.equals(treasures, that.treasures);
+        return Objects.equals(name, that.name) && Objects.equals(coordinate, that.coordinate) && Objects.equals(orientation, that.orientation) && Objects.equals(treasures, that.treasures) && Objects.equals(instructions, that.instructions);
     }
 
     @Override
