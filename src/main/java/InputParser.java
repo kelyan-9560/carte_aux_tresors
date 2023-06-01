@@ -1,3 +1,5 @@
+import exceptions.CoordinateException;
+import exceptions.MapSizeExceptions;
 import models.*;
 
 import java.util.ArrayList;
@@ -6,7 +8,21 @@ import java.util.List;
 public class InputParser {
 
     public static MapSize parseMapSize(List<String> lineSplit) {
-        return new MapSize(Integer.parseInt(lineSplit.get(1)), Integer.parseInt(lineSplit.get(2)));
+        int nbRows;
+        try {
+            nbRows = Integer.parseInt(lineSplit.get(1));
+        } catch (Exception e) {
+            throw new MapSizeExceptions("Map size X must be a number");
+        }
+
+        int nbColumns;
+        try {
+            nbColumns = Integer.parseInt(lineSplit.get(2));
+        } catch (Exception e) {
+            throw new MapSizeExceptions("Map size Y must be a number");
+        }
+
+        return new MapSize(nbRows, nbColumns);
     }
 
     public static Adventurer parseAdventurer(List<String> lineSplit) {
@@ -19,10 +35,21 @@ public class InputParser {
     }
 
     public static Coordinate parseCoordinate(List<String> lineSplit) {
-        return new Coordinate(
-                Integer.parseInt(lineSplit.get(1)),
-                Integer.parseInt(lineSplit.get(2))
-        );
+        int x;
+        try {
+            x = Integer.parseInt(lineSplit.get(1));
+        } catch (Exception e) {
+            throw new CoordinateException("Map size X must be a number");
+        }
+
+        int y;
+        try {
+            y = Integer.parseInt(lineSplit.get(2));
+        } catch (Exception e) {
+            throw new CoordinateException("Map size Y must be a number");
+        }
+
+        return new Coordinate(x, y);
     }
 
     public static List<Instruction> parseInstructions(List<String> lineSplit) {

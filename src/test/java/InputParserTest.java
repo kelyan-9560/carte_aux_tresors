@@ -1,8 +1,8 @@
+import exceptions.MapSizeExceptions;
 import models.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,5 +36,33 @@ class InputParserTest {
                 new Instruction("G")
         );
         assertEquals(instructionsParsed, instructionsExpected);
+    }
+
+    @Test
+    @DisplayName("Should throw an exception when ndRows of the map size is not a number")
+    void should_throw_an_exception_when_ndRows_of_the_map_size_is_not_a_number() {
+        var input = List.of("C", "A", "4");
+        assertThrows(MapSizeExceptions.class, () -> InputParser.parseMapSize(input));
+    }
+
+    @Test
+    @DisplayName("Should throw an exception when nbColumns of the map size is not a number")
+    void should_throw_an_exception_when_nbColumns_of_the_map_size_is_not_a_number() {
+        var input = List.of("C", "3", "Z");
+        assertThrows(MapSizeExceptions.class, () -> InputParser.parseMapSize(input));
+    }
+
+    @Test
+    @DisplayName("Should throw an exception when x of the coordinate is not a number")
+    void should_throw_an_exception_when_x_of_the_coordinate_is_not_a_number() {
+        var input = List.of("M", "A", "4");
+        assertThrows(MapSizeExceptions.class, () -> InputParser.parseMapSize(input));
+    }
+
+    @Test
+    @DisplayName("Should throw an exception when y of the coordinate is not a number")
+    void should_throw_an_exception_when_y_of_the_coordinate_is_not_a_number() {
+        var input = List.of("M", "3", "Z");
+        assertThrows(MapSizeExceptions.class, () -> InputParser.parseMapSize(input));
     }
 }
