@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
@@ -35,4 +36,13 @@ public class Game {
                                         .max().orElse(0);
     }
 
+    public String toFile(){
+        List<String> lines = new ArrayList<>();
+
+        lines.add(gameMap.getMapSize().toFile());
+        lines.addAll(gameMap.toFile());
+        adventurers.forEach(adventurer -> lines.add(adventurer.toFile()));
+
+        return String.join("\n", lines);
+    }
 }

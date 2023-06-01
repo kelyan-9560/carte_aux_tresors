@@ -39,4 +39,8 @@ public class MapSize {
                 ", nbColumns=" + nbColumns +
                 '}';
     }
+
+    public String toFile() {
+        return "C - " + nbRows + " - " + nbColumns;
+    }
 }

@@ -1,6 +1,5 @@
-package models;
-
 import exceptions.InstructionsException;
+import models.Instruction;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,9 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GameMap {
     private final MapSize mapSize;
@@ -54,6 +56,52 @@ public class GameMap {
     }
     public void addAdventurer(Adventurer adventurer) {
         map[adventurer.getCoordinate().getX()][adventurer.getCoordinate().getY()] = "A";
+    }
+
+    private List<Treasure> treasuresAt(Coordinate coordinate){
+        return treasures.stream()
+                .filter(treasure -> treasure.getCoordinate().equals(coordinate))
+                .collect(Collectors.toList());
+    }
+
+    private List<String> mountainsToFile(){
+        var res = new ArrayList<String>();
+
+        for (int i = 0; i < mapSize.getNbRows(); i++) {
+            for (int j = 0; j < mapSize.getNbColumns(); j++) {
+                if(map[i][j].equals("M")){
+                    res.add("M - " + i + " - " + j);
+                }
+            }
+        }
+
+        return res;
+    }
+
+    private List<String> treasuresToFile(){
+        var distinctTreasureCoordinate = treasures
+                .stream()
+                .map(Treasure::getCoordinate)
+                .distinct()
+                .collect(Collectors.toList());
+
+        var res = new ArrayList<String>();
+
+        distinctTreasureCoordinate.forEach(coordinate -> {
+            var nbTreasure = treasuresAt(coordinate).size();
+            res.add("T - " + coordinate.getX() + " - " + coordinate.getY() + " - " + nbTreasure);
+        });
+
+        return res;
+    }
+
+    public List<String> toFile(){
+        var res = new ArrayList<String>();
+
+        res.addAll(mountainsToFile());
+        res.addAll(treasuresToFile());
+
+        return res;
     }
 
     public MapSize getMapSize() {
